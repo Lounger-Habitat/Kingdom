@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e394afa12becb042b3554936c6e41c6, type: 3}
+  m_Name: ItemDataList_SO
+  m_EditorClassIdentifier: 
+  itemDetailsList:
+  - itemID: 1001
+    ItemName: "\u5357\u74DC"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: ad070f26e0cdc4eafa6b593dbdcbe9ff, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 738078985c017481f8d443cf821e26b5,
+      type: 3}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u8FD9\u662F\u4E00\u4E2A\u5357\u74DC\uFF0C\u53EF\u4EE5\u7EF4\u6301\u5FC5\u8981\u7684\u751F\u547D"
+    itemUseRadius: 0
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1002
+    ItemName: "\u6728\u5934"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 6bdcabcb3e8684660981c3dbfa135c8d, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u780D\u4F10\u6811\u6728\u53EF\u4EE5\u83B7\u5F97\u6728\u5934\uFF0C\u53EF\u4EE5\u642D\u5EFA\u5EFA\u7B51\uFF0C\u751F\u706B\u53D6\u6696"
+    itemUseRadius: 0
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1003
+    ItemName: "\u5357\u74DC\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 738078985c017481f8d443cf821e26b5, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u5357\u74DC\u79CD\u5B50\uFF0C\u64AD\u79CD\u5230\u571F\u5730\u53EF\u4EE5\u6536\u83B7\u5357\u74DC"
+    itemUseRadius: 0
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1004
+    ItemName: "\u6717\u59C6\u9152"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 0c055f09a64a74805ad18c1f0b134fec, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 1733023225965722, guid: d3c6f417ce01fa343be6b85bfc8fb119,
+      type: 3}
+    itemDescription: "\u6717\u59C6\u9152\uFF0C\u53EF\u4EE5\u8BA9\u4EBA\u8EAB\u5B50\u6696\u548C\u8D77\u6765"
+    itemUseRadius: 1
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 15
+    sellPercentage: 0
