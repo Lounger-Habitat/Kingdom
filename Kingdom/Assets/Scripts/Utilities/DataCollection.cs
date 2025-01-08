@@ -85,6 +85,8 @@ public class TileProperty
     public GridType gridType;
 
     public bool boolTypeValue;
+
+    public Vector3 worldPos;
 }
 
 [System.Serializable]
@@ -104,6 +106,8 @@ public class TileDetails
 
     public int growthDays = -1;
     public int daysSinceLastHarvest = -1;
+
+    public Vector3 worldPos;
 }
 
 

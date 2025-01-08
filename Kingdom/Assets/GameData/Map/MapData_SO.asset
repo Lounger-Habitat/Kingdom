@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7500fb0f9c7954aaa63f131e66f42d, type: 3}
+  m_Name: MapData_SO
+  m_EditorClassIdentifier: 
+  sceneName: TwoScene
+  gridWidth: 0
+  gridHeight: 0
+  originX: 0
+  originY: 0
+  tileProperties:
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 25.975, y: -25.035, z: 96.493}
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 24.4, y: -25.035, z: 96.76}
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 22.83, y: -25.035, z: 97.03}

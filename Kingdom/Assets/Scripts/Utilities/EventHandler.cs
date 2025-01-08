@@ -1,14 +1,94 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public static class EventHandler
 {
-    public static event Action<InventoryLocation, List<InventoryItem>> updateInventoryUI;
+    public static event Action<InventoryLocation, InventoryBag_SO> updateInventoryUI;
 
-    public static void CallUpdateInventoryUI(InventoryLocation location,List<InventoryItem> list)
+    public static void CallUpdateInventoryUI(InventoryLocation location,InventoryBag_SO bag_SO)
     {
-        updateInventoryUI?.Invoke(location,list);
+        updateInventoryUI?.Invoke(location, bag_SO);
     }
+
+    public static event Action<int, UnityEngine.Vector3> instantiateItemInScene;
+    public static void CallInstantiateItemInScene(int ID, UnityEngine.Vector3 pos)
+    {
+        instantiateItemInScene?.Invoke(ID, pos);
+    }
+
+    public static event Action<int, int> GameMinuteEvent;
+    public static void CallGameMinuteEvent(int minute, int hour)
+    {
+        GameMinuteEvent?.Invoke(minute, hour);
+    }
+
+    public static event Action<int, int, int, int, Season> GameDateEvent;
+
+    public static void CallGameDateEvent(int hour, int day, int month, int year, Season season)
+    {
+        GameDateEvent?.Invoke(hour, day, month, year, season);
+    }
+
+    public static event Action<DialoguePiece> ShowDialogueEvent;
+
+    public static void CallShowDialogueEvent(DialoguePiece piece)
+    {
+        ShowDialogueEvent?.Invoke(piece);
+    }
+
+    public static event Action<TipsData> ShowTipsEvent;
+    public static void CallShowTipsEvent(TipsData data)
+    {
+        ShowTipsEvent?.Invoke(data);
+    }
+
+    public static event Action<string> DisShowTipsEvent;
+    public static void CallDisShowTipsEvent(string gameobjectID)
+    {
+        DisShowTipsEvent?.Invoke(gameobjectID);
+    }
+
+    public static event Action<SlotType,InventoryBag_SO> BaseBagOpenEvent;
+
+    public static void CallBaseBagOpenEvent(SlotType slotype,InventoryBag_SO bag_So)
+    {
+        BaseBagOpenEvent?.Invoke(slotype,bag_So);
+    }
+
+    public static event Action<SlotType> BaseBagCloseEvent;
+
+    public static void CallBaseBagCloseEvent(SlotType slotype)
+    {
+        BaseBagCloseEvent?.Invoke(slotype);
+    }
+
+    public static event Action<ItemDetails,bool> ShowTradeUI;
+
+    public static void CallShowTradeUI(ItemDetails item,bool isSell)
+    {
+        ShowTradeUI?.Invoke(item,isSell);
+    }
+    public static event Action<int, TileDetails> PlantSeedEvent;
+    public static void CallPlantSeedEvent(int ID, TileDetails tile)
+    {
+        PlantSeedEvent?.Invoke(ID, tile);
+    }
+    public static event Action<int, Season> GameDayEvent;
+    public static void CallGameDayEvent(int day, Season season)
+    {
+        GameDayEvent?.Invoke(day, season);
+    }
+    public static event Action<UnityEngine.Vector3, ItemDetails> ExecuteActionAfterAnimation;
+    public static void CallExecuteActionAfterAnimation(UnityEngine.Vector3 pos, ItemDetails itemDetails)
+    {
+        ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
+    }
+
+    public static event Action<InventoryBag_SO,UnityEngine.Vector3> ShowCropPanelEvent;
+    public static void CallShowCropPanelEvent(InventoryBag_SO bagData,UnityEngine.Vector3 worldPos)
+    {
+        ShowCropPanelEvent?.Invoke(bagData,worldPos);
+    }
+
 }

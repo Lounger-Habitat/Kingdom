@@ -9,9 +9,11 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("背包数据")] public InventoryBag_SO playerBag;
 
+    //public int playerMoney;
+
     private void Start()
     {
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.itemList);
+        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag);
     }
 
     public ItemDetails GetItemDetails(int ID)
@@ -84,7 +86,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         
         //更新背包UI
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.itemList);
+        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag);
     }
 
     //同背包里交换物品
@@ -104,6 +106,66 @@ public class InventoryManager : Singleton<InventoryManager>
             playerBag.itemList[fromIndex] = new InventoryItem();
         }
         
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.itemList);
+        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag);
+    }
+
+     /// <summary>
+        /// 移除指定数量的背包物品
+        /// </summary>
+        /// <param name="ID">物品ID</param>
+        /// <param name="removeAmount">数量</param>
+        public void RemoveItem(int ID, int removeAmount)
+        {
+            var index = GetItemIndexInBag(ID);
+
+            if (playerBag.itemList[index].itemAmount > removeAmount)
+            {
+                var amount = playerBag.itemList[index].itemAmount - removeAmount;
+                var item = new InventoryItem { itemID = ID, itemAmount = amount };
+                playerBag.itemList[index] = item;
+            }
+            else if (playerBag.itemList[index].itemAmount == removeAmount)
+            {
+                var item = new InventoryItem();
+                playerBag.itemList[index] = item;
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag);
+        }
+
+    public void TradeItem(ItemDetails itemDetails,int amount,bool isSell)
+    {
+        int cost = itemDetails.itemPrice * amount;
+
+        //获取在背包的位置，可能没有
+        int index = GetItemIndexInBag(itemDetails.itemID);
+
+        if (isSell)//卖
+        {
+            if(playerBag.itemList[index].itemAmount>=amount)
+            {
+                //数量够，可以卖出
+                RemoveItem(itemDetails.itemID,amount);
+                cost = (int)(cost*itemDetails.sellPercentage);
+                playerBag.money +=cost;
+
+            }else{
+                //数量不够啊兄弟，再想想
+            }
+        }
+        else//买
+        {
+            if (playerBag.money - cost>=0)//钱够
+            {
+                AddItemAtIndex(itemDetails.itemID,index,amount);//TODO：可能有背包已满情况
+                playerBag.money -= cost;
+            }
+            else
+            {
+                //钱不够再想想
+            }
+        }
+
+        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag);
     }
 }

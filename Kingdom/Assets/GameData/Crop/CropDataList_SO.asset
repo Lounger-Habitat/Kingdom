@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c00721a5465854b83e230831850d70, type: 3}
+  m_Name: CropDataList_SO
+  m_EditorClassIdentifier: 
+  cropDetailsList:
+  - seedItemID: 1003
+    growthDays: 01000000020000000200000002000000
+    growthPrefabs:
+    - {fileID: 2129129030937758094, guid: 31d0170c73f2c45408f7baed557294db, type: 3}
+    - {fileID: 7424468771147272410, guid: cf98dac0d8dd73440a78b6553d021d8a, type: 3}
+    - {fileID: 1846981399674409001, guid: 12d7cb66b52e89246afa131a745f01f0, type: 3}
+    - {fileID: 2056925553962884495, guid: 54d119c38727ea542903aaaf9ce31495, type: 3}
+    growthSprite: []
+    seasons: 00000000010000000200000003000000
+    harvestToolItemID: 
+    requireActionCount: 
+    transferItemID: 0
+    producedItemID: 
+    producedMinAmount: 
+    producedMaxAmount: 
+    spawnRadius: {x: 0, y: 0}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticalEffect: 0
+    effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
+    soundEffect: 0

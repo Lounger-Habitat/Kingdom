@@ -17,16 +17,15 @@ MonoBehaviour:
     ItemName: "\u5357\u74DC"
     itemType: 1
     itemIcon: {fileID: 21300000, guid: ad070f26e0cdc4eafa6b593dbdcbe9ff, type: 3}
-    itemOnWorldSprite: {fileID: 21300000, guid: 738078985c017481f8d443cf821e26b5,
-      type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 738078985c017481f8d443cf821e26b5, type: 3}
     itemPrefab: {fileID: 0}
     itemDescription: "\u8FD9\u662F\u4E00\u4E2A\u5357\u74DC\uFF0C\u53EF\u4EE5\u7EF4\u6301\u5FC5\u8981\u7684\u751F\u547D"
     itemUseRadius: 0
     canPickedup: 1
     canDropped: 0
     canCarried: 0
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 15
+    sellPercentage: 0.664
   - itemID: 1002
     ItemName: "\u6728\u5934"
     itemType: 1
@@ -38,8 +37,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 0
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 10
+    sellPercentage: 1
   - itemID: 1003
     ItemName: "\u5357\u74DC\u79CD\u5B50"
     itemType: 0
@@ -51,19 +50,70 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 0
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 25
+    sellPercentage: 0.86
   - itemID: 1004
     ItemName: "\u6717\u59C6\u9152"
     itemType: 1
     itemIcon: {fileID: 21300000, guid: 0c055f09a64a74805ad18c1f0b134fec, type: 3}
     itemOnWorldSprite: {fileID: 0}
-    itemPrefab: {fileID: 1733023225965722, guid: d3c6f417ce01fa343be6b85bfc8fb119,
-      type: 3}
+    itemPrefab: {fileID: 1733023225965722, guid: d3c6f417ce01fa343be6b85bfc8fb119, type: 3}
     itemDescription: "\u6717\u59C6\u9152\uFF0C\u53EF\u4EE5\u8BA9\u4EBA\u8EAB\u5B50\u6696\u548C\u8D77\u6765"
     itemUseRadius: 1
     canPickedup: 1
+    canDropped: 1
+    canCarried: 0
+    itemPrice: 22
+    sellPercentage: 0.898
+  - itemID: 1005
+    ItemName: "\u5C0F\u9EA6"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: e8ebe711ec1de4697a10d8c2f3f39f20, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u6210\u719F\u7684\u5C0F\u9EA6\uFF0C\u53EF\u4EE5\u52A0\u5DE5\u6210\u9762\u7C89\u3002"
+    itemUseRadius: 0
+    canPickedup: 0
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 10
+    sellPercentage: 1
+  - itemID: 1006
+    ItemName: "\u5927\u7C73"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 9ae5a331348064d73aa91a952b9e1a41, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u5927\u7C73\uFF0C\u6CA1\u6709\u4EC0\u4E48\u597D\u8BF4\u7684"
+    itemUseRadius: 0
+    canPickedup: 0
     canDropped: 0
     canCarried: 0
     itemPrice: 15
-    sellPercentage: 0
+    sellPercentage: 0.879
+  - itemID: 1007
+    ItemName: "\u571F\u8C46"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 59a2ce6cc735e4cd3a3da1bad8629303, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u6700\u7B80\u5355\u7684\u98DF\u7269\uFF0C\u4F46\u662F\u5356\u4E0D\u4E0A\u4EF7\u94B1"
+    itemUseRadius: 0
+    canPickedup: 0
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 5
+    sellPercentage: 0.478
+  - itemID: 1008
+    ItemName: "\u77F3\u5934"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 0d1bd60a4df28461a802344fdf5d9478, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemPrefab: {fileID: 0}
+    itemDescription: "\u4E00\u5757\u770B\u8D77\u6765\u5F88\u666E\u901A\u7684\u77F3\u5934\uFF0C\u5E76\u6CA1\u6709\u4EC0\u4E48\u7528"
+    itemUseRadius: 0
+    canPickedup: 0
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 1
+    sellPercentage: 1

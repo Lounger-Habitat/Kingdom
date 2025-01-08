@@ -15,10 +15,12 @@ MonoBehaviour:
   itemList:
   - itemID: 1001
     itemAmount: 2
-  - itemID: 1002
+  - itemID: 1003
     itemAmount: 7
   - itemID: 1004
     itemAmount: 4
+  - itemID: 1008
+    itemAmount: 10
   - itemID: 0
     itemAmount: 0
   - itemID: 0
@@ -51,5 +53,4 @@ MonoBehaviour:
     itemAmount: 0
   - itemID: 0
     itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+  money: 290

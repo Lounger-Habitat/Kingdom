@@ -1,0 +1,46 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class HeadTipsUI : MonoBehaviour
+{
+    //提示预制体
+    public HeadTipsItem prefabs;
+    //提示物体父物体
+    public Transform parent;
+
+    private List<HeadTipsItem> headTipsItems = new();
+
+    void OnEnable() { 
+        EventHandler.ShowTipsEvent += OnShowTipsEvent;
+        EventHandler.DisShowTipsEvent += OnDisShowTipsEvent;
+    }
+    void OnDisable() {
+        EventHandler.ShowTipsEvent -= OnShowTipsEvent;
+        EventHandler.DisShowTipsEvent -= OnDisShowTipsEvent;
+     }
+
+    
+
+    private void OnShowTipsEvent(TipsData data)
+    {
+        //Debug.Log("id是"+data.belongID);
+        if (!headTipsItems.Find(item=>item.selfData.belongID == data.belongID))//此时还未生成提示
+        {
+            var tipsItem = Instantiate(prefabs,parent);
+            tipsItem.Init(data);
+            headTipsItems.Add(tipsItem);
+        }
+    }
+
+    private void OnDisShowTipsEvent(string gameobjectID)
+    {
+        //Debug.Log("清除id是"+gameobjectID);
+        var tipsItem = headTipsItems.Find(item=>item.selfData.belongID == gameobjectID);
+        if (tipsItem)
+        {
+            headTipsItems.Remove(tipsItem);
+            Destroy(tipsItem.gameObject);
+        }
+    }
+}

@@ -91,17 +91,28 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             {
                 int targetIndex = targetSlot.slotIndex;
 
-                //同背包物品位置交换
-                if (SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Bag)
+                if (SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Bag)//同背包物品位置交换
                 {
                     InventoryManager.Instance.SwapItem(slotIndex, targetIndex);
+                }
+                else if (SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Shop)//卖出
+                {
+                    EventHandler.CallShowTradeUI(itemDetails,true);
+                }
+                else if (SlotType == SlotType.Shop && targetSlot.SlotType == SlotType.Bag)//买入
+                {
+                    EventHandler.CallShowTradeUI(itemDetails, false);
                 }
             }
         }
         else
         {
             //放地上了
-            
+            if (itemDetails.canDropped)
+            {
+                var pos  = new Vector3(0,0,0);//物品放下位置，后期可以改成人物四周随机位置
+                EventHandler.CallInstantiateItemInScene(itemDetails.itemID,pos);
+            }
         }
 
         inventoryUI.UpdateSlotHightlight(-1);
