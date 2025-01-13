@@ -16,7 +16,7 @@ MonoBehaviour:
   - itemID: 1001
     itemAmount: 2
   - itemID: 1003
-    itemAmount: 7
+    itemAmount: 50
   - itemID: 1004
     itemAmount: 4
   - itemID: 1008

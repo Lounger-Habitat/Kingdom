@@ -8,24 +8,28 @@ public class GridMap : MonoBehaviour
     public GridType gridType;
     //private Tilemap currentTilemap;
 
-    private void OnDisable()
-    {
-        if (!Application.IsPlaying(this))
-        {
-            //currentTilemap = GetComponent<Tilemap>();
+    // private void OnDisable()
+    // {
+    //     if (!Application.IsPlaying(this))
+    //     {
+    //         //currentTilemap = GetComponent<Tilemap>();
 
-            if (mapData != null)
-            {
-                mapData.tileProperties.Clear();
-            }
-        }
-    }
+    //         if (mapData != null)
+    //         {
+    //             mapData.tileProperties.Clear();
+    //         }
+    //     }
+    // }
 
     private void OnEnable()
     {
         //Debug.Log("qingnianjingd");
         if (!Application.IsPlaying(this))
         {
+            if (mapData != null)
+            {
+                mapData.tileProperties.Clear();
+            }
             //currentTilemap = GetComponent<Tilemap>();
             //Debug.Log("qingnianjingd");
             UpdateTileProperties();

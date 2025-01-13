@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GridMapManager : MonoBehaviour
+public class GridMapManager : Singleton<GridMapManager>
 {
     [Header("地图信息")]
     public List<MapData_SO> mapDatalist;
@@ -17,14 +17,14 @@ public class GridMapManager : MonoBehaviour
         EventHandler.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
         //EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.GameDayEvent += OnGameDayEvent;
-        //EventHandler.RefreshCurrentMap += RefreshMap;
+        EventHandler.RefreshCurrentMap += RefreshMap;
     }
     private void OnDisable()
     {
         EventHandler.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
         //EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.GameDayEvent -= OnGameDayEvent;
-        //EventHandler.RefreshCurrentMap -= RefreshMap;
+        EventHandler.RefreshCurrentMap -= RefreshMap;
     }
 
     /// <summary>
@@ -146,7 +146,7 @@ public class GridMapManager : MonoBehaviour
         // if (waterTilemap != null)
         //     waterTilemap.ClearAllTiles();
 
-        foreach (var crop in FindObjectsOfType<Crop>())
+        foreach (var crop in FindObjectsByType<Crop>(FindObjectsSortMode.None))
         {
             Destroy(crop.gameObject);
         }
@@ -194,8 +194,13 @@ public class GridMapManager : MonoBehaviour
                 switch (itemDetails.itemType)
                 {
                     case ItemType.Seed:             //种子
+                        if (currentTile.seedItemID!=-1)//当前地块已经种植，无法继续种植
+                        {
+                            Debug.Log("已经种了，不让种了");
+                            return;
+                        }
                         EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
-                        //EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, itemDetails.itemType);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, enterPos, itemDetails.itemType);
                         //EventHandler.CallPlaySoundEvent(SoundName.Plant);
                         break;
                     // case ItemType.Commodity:        //商品
@@ -275,6 +280,21 @@ public class GridMapManager : MonoBehaviour
             {
                 tileDetailsDict.Add(key, tileDetails);
             }
+        }
+
+        public bool CheckTileHasSeed(Vector3 mouseGridPos)
+        {
+            var tileDetail= GetTileDetailsOnMousePosition(mouseGridPos);
+            if (tileDetail == null)
+            {
+                return false;
+            }
+
+            if (tileDetail.seedItemID!=-1)
+            {
+                return true;
+            }
+            return false;
         }
         
 }

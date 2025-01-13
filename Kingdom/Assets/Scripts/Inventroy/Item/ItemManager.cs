@@ -7,21 +7,25 @@ public class ItemManager : MonoBehaviour
 
     private Transform itemParent;
 
-    private void OnEnable(){
+    private void OnEnable()
+    {
         EventHandler.instantiateItemInScene += OnInstantiateItemInScene;
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         EventHandler.instantiateItemInScene += OnInstantiateItemInScene;
     }
 
-    void Start(){
+    void Start()
+    {
         itemParent = transform;//目前先把自己当作父节点
     }
 
-     private void OnInstantiateItemInScene(int ID, Vector3 pos)
+    private void OnInstantiateItemInScene(int ID, Vector3 pos)
     {
-        var item = Instantiate(itemPrefab,pos,Quaternion.identity,itemParent);
+        var item = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
         item.itemID = ID;
     }
+
 }

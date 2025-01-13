@@ -9,9 +9,23 @@ public class CropEnter : MonoBehaviour
         Debug.Log("go enter");
         if (other.tag.Contains("Tile"))
         {
+            if (GridMapManager.Instance.CheckTileHasSeed(other.transform.position))
+            {
+                return;//有种子种植了，无需再次打开种植面板
+            }
+                //进入种植区域，打开种植面板
+            EventHandler.CallShowCropPanelEvent(bag_SO, other.transform.position);
+        }
+    }
+
+    void OnTriggerExit(Collider other)//退出
+    {
+        Debug.Log("go Exit");
+        if (other.tag.Contains("Tile"))
+        {
 
             //进入种植区域，打开种植面板
-           EventHandler.CallShowCropPanelEvent(bag_SO,other.transform.position);
+            EventHandler.CallDisShowCropPanelEvent();
         }
     }
 }

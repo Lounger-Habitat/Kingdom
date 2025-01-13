@@ -21,7 +21,7 @@ MonoBehaviour:
   - tileCoordinate: {x: 0, y: 0}
     gridType: 0
     boolTypeValue: 1
-    worldPos: {x: 25.975, y: -25.035, z: 96.493}
+    worldPos: {x: 26, y: -25.035, z: 96.507}
   - tileCoordinate: {x: 0, y: 0}
     gridType: 0
     boolTypeValue: 1

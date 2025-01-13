@@ -24,10 +24,10 @@ MonoBehaviour:
     seasons: 00000000010000000200000003000000
     harvestToolItemID: 
     requireActionCount: 
-    transferItemID: 0
-    producedItemID: 
-    producedMinAmount: 
-    producedMaxAmount: 
+    transferItemID: -1
+    producedItemID: e9030000
+    producedMinAmount: 02000000
+    producedMaxAmount: 04000000
     spawnRadius: {x: 0, y: 0}
     daysToRegrow: 0
     regrowTimes: 0

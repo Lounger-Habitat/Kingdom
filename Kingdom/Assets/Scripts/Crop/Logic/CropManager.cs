@@ -4,7 +4,7 @@ public class CropManager : MonoBehaviour
 {
     public CropDataList_SO cropData;
 
-        private Transform cropParent;
+        private Transform cropParent => transform;
 
         private Grid currentGrid;
 
@@ -84,8 +84,7 @@ public class CropManager : MonoBehaviour
             GameObject cropInstance = Instantiate(cropPrefab, pos, Quaternion.identity, cropParent);
             //cropInstance.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
 
-            //cropInstance.GetComponent<Crop>().cropDetails = cropDetails;
-            //cropInstance.GetComponent<Crop>().tileDetails = tileDetails;
+            cropInstance.GetComponent<Crop>().cropDetails = cropDetails;
         }
 
 

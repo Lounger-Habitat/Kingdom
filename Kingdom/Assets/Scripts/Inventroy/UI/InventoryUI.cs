@@ -134,6 +134,7 @@ public class InventoryUI : MonoBehaviour
                }
             }
             moneyText.text = bag_SO.money.ToString();//这更新的是玩家背包金钱
+            EventHandler.CallUpdateCropUIEvent();
             break;
          case InventoryLocation.Box:
             for (int i = 0; i < baseBagSlots.Count; i++)
