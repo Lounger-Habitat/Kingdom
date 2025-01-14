@@ -146,13 +146,14 @@ public class Crop : MonoBehaviour
             {
                 amountToProduce = Random.Range(cropDetails.producedMinAmount[i], cropDetails.producedMaxAmount[i] + 1);
             }
-            
+             // //执行生成指定数量的物品
             for (int j = 0; j < amountToProduce; j++)
             {
                 EventHandler.CallHarvestAtPlayerPosition(cropDetails.producedItemID[i]);
             }
-
-            // //执行生成指定数量的物品
+            var producedItem = InventoryManager.Instance.GetItemDetails(cropDetails.producedItemID[i]);
+            var msg = $"收获{producedItem.ItemName}x{amountToProduce}";
+            EventHandler.CallShowTextTipsEvent(msg);
             // for (int j = 0; j < amountToProduce; j++)
             // {
             //     if (cropDetails.generateAtPlayerPosition)

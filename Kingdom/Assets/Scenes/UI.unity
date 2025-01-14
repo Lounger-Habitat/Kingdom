@@ -2470,6 +2470,7 @@ GameObject:
   - component: {fileID: 582277016}
   - component: {fileID: 582277015}
   - component: {fileID: 582277017}
+  - component: {fileID: 582277018}
   m_Layer: 5
   m_Name: TextTipsItem
   m_TagString: Untagged
@@ -2484,17 +2485,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582277012}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1051817715}
-  m_Father: {fileID: 690781581}
+  m_Father: {fileID: 1984158539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 900, y: 44}
   m_SizeDelta: {x: 260, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582277015
@@ -2547,6 +2548,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &582277018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582277012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ca87aa05525bd4586425f0456f7abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 582277017}
+  tMP_Text: {fileID: 1051817716}
 --- !u!224 &596921128 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5034462532968704886, guid: 12353335d1ce0ed4b9f363fef211ab98, type: 3}
@@ -3091,8 +3106,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 582277013}
+  m_Children: []
   m_Father: {fileID: 1984158539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -9614,6 +9628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1984158539}
+  - component: {fileID: 1984158540}
   m_Layer: 5
   m_Name: TextTips
   m_TagString: Untagged
@@ -9633,6 +9648,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 582277013}
   - {fileID: 690781581}
   m_Father: {fileID: 279720575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9641,6 +9657,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1984158540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984158538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd38a6dbfe95cc40a4b7c8d0d3744ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 582277018}
+  parentTransform: {fileID: 690781581}
 --- !u!224 &1988223883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5034462532968704886, guid: 12353335d1ce0ed4b9f363fef211ab98, type: 3}

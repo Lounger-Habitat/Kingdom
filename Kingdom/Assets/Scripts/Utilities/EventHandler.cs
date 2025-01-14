@@ -130,4 +130,10 @@ public static class EventHandler
     {
         RefreshCurrentMap?.Invoke();
     }
+
+    public static event Action<string> ShowTextTipsEvent;
+    public static void CallShowTextTipsEvent(string msg)
+    {
+        ShowTextTipsEvent?.Invoke(msg);
+    }
 }
