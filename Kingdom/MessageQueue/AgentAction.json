@@ -1,0 +1,22 @@
+{
+    "Actions": [
+        {
+            "ActionName": "Move",
+            "Params": [
+                "Env-Cube 1"
+            ]
+        },
+        {
+            "ActionName": "Jump",
+            "Params": [
+                "5"
+            ]
+        },
+        {
+            "ActionName": "Move",
+            "Params": [
+                "Env-Cube 0"
+            ]
+        }
+    ]
+}
