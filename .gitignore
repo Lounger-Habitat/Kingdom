@@ -74,3 +74,11 @@
 **/[Aa]ssets/[Ss]treamingAssets/aa/*
 Kingdom/Assets/Scenes/TwoScene/LightingData.asset
 Kingdom/Assets/Scenes/TwoScene/LightingData.asset.meta
+
+
+# python ignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
