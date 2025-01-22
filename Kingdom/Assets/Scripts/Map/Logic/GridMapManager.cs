@@ -6,7 +6,7 @@ public class GridMapManager : Singleton<GridMapManager>
 {
     [Header("地图信息")]
     public List<MapData_SO> mapDatalist;
-
+    public Transform tileParent;
     private Season currentSeason;
 
     //场景名字+坐标和对应的瓦片信息
@@ -118,6 +118,18 @@ public class GridMapManager : Singleton<GridMapManager>
             else
             {
                 tileDetailsDict.Add(key, tileDetails);
+            }
+            if (tileProperty.canUseObj == null)
+            {
+                var title = tileParent.Find(tileProperty.tileName);
+                title.GetComponent<Collider>().enabled = tileProperty.canUse;
+                title.Find("CanUse").gameObject.SetActive(tileProperty.canUse);
+            }
+            else
+            {
+                //根据存储信息，设定当前地块是否可以启用
+                tileProperty.canUseObj.SetActive(tileProperty.canUse);
+                tileProperty.canUseObj.transform.parent.GetComponent<Collider>().enabled = tileProperty.canUse;
             }
         }
     }
@@ -297,4 +309,25 @@ public class GridMapManager : Singleton<GridMapManager>
         return false;
     }
 
+    [ContextMenu("openTitle")]
+    //开启可种植区域
+    public void OpenCropTile()
+    {
+        var titleList = mapDatalist[0];
+        foreach (var item in titleList.tileProperties)
+        {
+            if (!item.canUse)
+            {
+                item.canUse = true;//设定可以种植
+                item.canUseObj.SetActive(true);
+                item.canUseObj.transform.parent.GetComponent<Collider>().enabled = true;//打开碰撞器
+                break;
+            }
+        }
+    }
+
+    public void CloseCropTile()
+    {
+
+    }
 }

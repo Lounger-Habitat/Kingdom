@@ -21,8 +21,19 @@ public class DialogueController : MonoBehaviour
     void Awake()
     {
         //uiSign = transform.GetChild(1).gameObject;
-        FillDialogueStack();
+        //FillDialogueStack();
         gameobjectID = GetInstanceID().ToString();
+        SetPieceList();//如果没有任务就默认对话
+    }
+
+    //设定NPC对话list
+    public void SetPieceList(List<DialoguePiece> listData = null)
+    {
+        if (listData != null)
+        {
+            dialogueList = listData;
+        }
+        FillDialogueStack();
     }
 
     /// <summary>
@@ -44,7 +55,7 @@ public class DialogueController : MonoBehaviour
         {
             canTalk = true;
             Debug.Log("玩家进入");
-            EventHandler.CallShowTipsEvent(new TipsData("按下<color=\"black\">空格</color>对话", transform.position + Vector3.up * 1.8f, gameobjectID));
+            EventHandler.CallShowTipsEvent(new TipsData("按下<color=\"black\">F键</color>对话", transform.position + Vector3.up * 2.2f, gameobjectID));
         }
     }
     void OnTriggerExit(Collider other)
@@ -54,13 +65,14 @@ public class DialogueController : MonoBehaviour
             canTalk = false;
             Debug.Log("玩家退出");
             EventHandler.CallDisShowTipsEvent(gameobjectID);
+            EventHandler.CallDisShowSelectAllTipsEvent();
         }
     }
 
     void Update()
     {
         //uiSign.SetActive(canTalk);
-        if (canTalk & Input.GetKeyDown(KeyCode.Space) && !isTalking)
+        if (canTalk & Input.GetKeyDown(KeyCode.F) && !isTalking)
         {
             StopAllCoroutines();
             StartCoroutine(DailogueRoutine());

@@ -22,11 +22,349 @@ MonoBehaviour:
     gridType: 0
     boolTypeValue: 1
     worldPos: {x: 26, y: -25.035, z: 96.507}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile
   - tileCoordinate: {x: 0, y: 0}
     gridType: 0
     boolTypeValue: 1
     worldPos: {x: 24.4, y: -25.035, z: 96.76}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (1)
   - tileCoordinate: {x: 0, y: 0}
     gridType: 0
     boolTypeValue: 1
     worldPos: {x: 22.83, y: -25.035, z: 97.03}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (2)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 21.127, y: -25.035, z: 97.317}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (3)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 19.556, y: -25.024, z: 97.718}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (4)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 18.016, y: -24.995, z: 98.038}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (5)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 16.51, y: -24.995, z: 98.29}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (6)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 15.166, y: -24.991, z: 98.516}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (7)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 13.702, y: -24.991, z: 98.762}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (8)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 12.254, y: -24.991, z: 99.006}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (9)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 10.875, y: -25.075, z: 99.238}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (10)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 28.374, y: -24.931, z: 98.449}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (11)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 26.817, y: -24.933, z: 98.732}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (12)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 25.252, y: -24.95, z: 99.03}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (13)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 23.547, y: -24.95, z: 99.303}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (14)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 21.96, y: -24.939001, z: 99.609}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (15)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 20.412, y: -24.932, z: 99.883}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (16)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 18.905, y: -24.91, z: 100.128}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (17)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 17.571, y: -24.92, z: 100.413}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (18)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 16.101, y: -24.906, z: 100.626}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (19)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 14.656, y: -24.928, z: 100.885}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (20)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 13.280001, y: -24.912, z: 101.137}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (21)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 11.903, y: -24.97, z: 101.369}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (22)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 10.753, y: -25.111, z: 101.619}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (49)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 30.785, y: -24.926, z: 100.897}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (23)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 29.2, y: -24.868, z: 101.098}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (24)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 27.562, y: -24.868, z: 101.218}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (25)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 25.808, y: -24.878998, z: 101.33}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (26)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 24.245, y: -24.88, z: 101.565}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (27)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 22.877, y: -24.86, z: 101.708}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (28)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 21.388, y: -24.892, z: 101.936}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (29)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 19.963, y: -24.895, z: 102.155}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (30)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 18.596, y: -24.876, z: 102.445}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (31)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 17.195, y: -24.88, z: 102.78}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (32)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 15.758, y: -24.88, z: 103.084}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (33)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 14.479, y: -24.877, z: 103.338}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (34)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 13.253, y: -25.005, z: 103.618}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (35)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 32.463, y: -24.926, z: 102.91}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (36)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 31.024, y: -24.868, z: 103.083}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (37)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 29.386, y: -24.868, z: 103.203}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (38)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 27.632, y: -24.878998, z: 103.315}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (39)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 26.065, y: -24.88, z: 103.503}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (40)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 24.699, y: -24.86, z: 103.679}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (41)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 23.203, y: -24.892, z: 103.866}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (42)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 21.775, y: -24.895, z: 104.066}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (43)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 20.406, y: -24.876, z: 104.35}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (44)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 18.995, y: -24.88, z: 104.623}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (45)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 17.561, y: -24.88, z: 104.948}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (46)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 16.264, y: -24.877, z: 105.282}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (47)
+  - tileCoordinate: {x: 0, y: 0}
+    gridType: 0
+    boolTypeValue: 1
+    worldPos: {x: 14.992, y: -24.886, z: 105.617}
+    canUse: 0
+    canUseObj: {fileID: 0}
+    tileName: Tile (48)

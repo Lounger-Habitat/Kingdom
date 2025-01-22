@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class EventHandler
 {
@@ -101,6 +102,17 @@ public static class EventHandler
     {
         DisShowCropPanelEvent?.Invoke();
     }
+
+    public static event Action<InventoryBag_SO, TaskDetail> ShowSubmitPanelEvent;
+    public static void CallShowSubmitPanelEvent(InventoryBag_SO bagData, TaskDetail taskDetail)
+    {
+        ShowSubmitPanelEvent?.Invoke(bagData, taskDetail);
+    }
+    public static event Action DisShowSubmitPanelEvent;
+    public static void CallDisShowSubmitPanelEvent()
+    {
+        DisShowSubmitPanelEvent?.Invoke();
+    }
     public static event Action<int, Vector3, ItemType> DropItemEvent;
     public static void CallDropItemEvent(int ID, Vector3 pos, ItemType itemType)
     {
@@ -135,5 +147,49 @@ public static class EventHandler
     public static void CallShowTextTipsEvent(string msg)
     {
         ShowTextTipsEvent?.Invoke(msg);
+    }
+
+    public static event Action<float> FadePanelEvent;
+    /// <summary>
+    /// 渐变Panel
+    /// </summary>
+    /// <param name="value">1黑屏，0透明</param>
+    public static void CallFadePanelEvent(float value)
+    {
+        FadePanelEvent?.Invoke(value);
+    }
+
+
+    //对话完成后右侧选择按钮UI
+
+    public static event Action<string,string,UnityAction> OnShowSelectTipsEvent;
+    /// <summary>
+    /// 打开右侧对话选择按钮，可以生成多个
+    /// </summary>
+    /// <param name="ID">当前按钮ID，通过此ID删除按钮</param>
+    /// <param name="btnMsg">按钮显示信息</param>
+    /// <param name="btnOnClick">按钮点击后触发回调</param>
+    public static void CallOnShowSelectTipsEvent(string ID,string btnMsg,UnityAction btnOnClick)
+    {
+        OnShowSelectTipsEvent?.Invoke(ID,btnMsg,btnOnClick);
+    }
+
+    public static event Action<string> DisShowSelectTipsEvent;
+    /// <summary>
+    /// 删除右侧对话选择按钮
+    /// </summary>
+    /// <param name="ID">当前按钮ID，通过此ID删除按钮</param>
+    public static void CallDisShowSelectTipsEvent(string ID)
+    {
+        DisShowSelectTipsEvent?.Invoke(ID);
+    }
+
+    public static event Action DisShowSelectAllTipsEvent;
+    /// <summary>
+    /// 删除所有右侧对话按钮
+    /// </summary>
+    public static void CallDisShowSelectAllTipsEvent()
+    {
+        DisShowSelectAllTipsEvent?.Invoke();
     }
 }

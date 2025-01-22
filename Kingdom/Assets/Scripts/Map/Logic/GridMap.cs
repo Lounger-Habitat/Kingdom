@@ -21,11 +21,34 @@ public class GridMap : MonoBehaviour
     //     }
     // }
 
-    private void OnEnable()
+    //     private void OnEnable()
+    //     {
+    //         //Debug.Log("qingnianjingd");
+    //         if (!Application.IsPlaying(this))
+    //         {
+    // #if UNITY_EDITOR
+    //             if (mapData != null)
+    //             {
+    //                 mapData.tileProperties.Clear();
+    //             }
+    //             //currentTilemap = GetComponent<Tilemap>();
+    //             //Debug.Log("qingnianjingd");
+    //             UpdateTileProperties();
+    //             if (mapData != null)
+    //             {
+    //                 EditorUtility.SetDirty(mapData);
+    //             }
+    // #endif
+    //         }
+    //     }
+
+    [ContextMenu("刷新瓦片信息")]
+    public void SetTileDataInEditor()
     {
         //Debug.Log("qingnianjingd");
         if (!Application.IsPlaying(this))
         {
+#if UNITY_EDITOR
             if (mapData != null)
             {
                 mapData.tileProperties.Clear();
@@ -33,7 +56,6 @@ public class GridMap : MonoBehaviour
             //currentTilemap = GetComponent<Tilemap>();
             //Debug.Log("qingnianjingd");
             UpdateTileProperties();
-#if UNITY_EDITOR
             if (mapData != null)
             {
                 EditorUtility.SetDirty(mapData);
@@ -58,12 +80,15 @@ public class GridMap : MonoBehaviour
                 {
                     if (item != null)
                     {
-                        var pos =item.transform.position;
+                        var pos = item.transform.position;
                         TileProperty newTile = new TileProperty
                         {
-                            worldPos  = new Vector3(pos.x, pos.y,pos.z),
+                            worldPos = new Vector3(pos.x, pos.y, pos.z),
                             gridType = this.gridType,
-                            boolTypeValue = true
+                            boolTypeValue = true,
+                            canUse = false,
+                            canUseObj = item.transform.GetChild(0).gameObject,
+                            tileName = item.name
                         };
 
                         mapData.tileProperties.Add(newTile);

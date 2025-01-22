@@ -42,17 +42,17 @@ public class InventoryUI : MonoBehaviour
       EventHandler.ShowTradeUI -= OnShowTradeUI;
    }
 
-    private void OnShowTradeUI(ItemDetails details, bool isSell)
-    {
-        tradeUI.gameObject.SetActive(true);
-        tradeUI.SetupTradeUI(details,isSell);
-    }
+   private void OnShowTradeUI(ItemDetails details, bool isSell)
+   {
+      tradeUI.gameObject.SetActive(true);
+      tradeUI.SetupTradeUI(details, isSell);
+   }
 
-    /// <summary>
-    /// 关闭通用背包
-    /// </summary>
-    /// <param name="type"></param>
-    private void OnBaseBagCloseEvent(SlotType type)
+   /// <summary>
+   /// 关闭通用背包
+   /// </summary>
+   /// <param name="type"></param>
+   private void OnBaseBagCloseEvent(SlotType type)
    {
       baseBag.SetActive(false);
       itemToolTips.gameObject.SetActive(false);
@@ -82,7 +82,14 @@ public class InventoryUI : MonoBehaviour
          SlotType.Shop => shopSlotPrefab,
          _ => null
       };
-
+      if (baseBagSlots != null)
+      {
+         foreach (var item in baseBagSlots)
+         {
+            Destroy(item.gameObject);
+         }
+         baseBagSlots.Clear();
+      }
       //生成UI，根据数据生成对应数量的格子
       baseBag.SetActive(true);
       baseBagSlots = new();
@@ -123,7 +130,7 @@ public class InventoryUI : MonoBehaviour
          case InventoryLocation.Player:
             for (int i = 0; i < PlayerSlots.Length; i++)
             {
-               if (list[i].itemAmount > 0)
+               if (list[i].itemAmount > 0)//TODO:检测list[i]是否存在
                {
                   var item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                   PlayerSlots[i].UpdateSlot(item, list[i].itemAmount);

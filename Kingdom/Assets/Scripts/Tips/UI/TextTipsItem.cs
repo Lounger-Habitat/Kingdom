@@ -13,7 +13,8 @@ public class TextTipsItem : MonoBehaviour
     }
 
     IEnumerator  ShowTextTips(){
-
+        yield return null;
+        (transform as RectTransform).sizeDelta = new Vector2(tMP_Text.rectTransform.rect.width+15,50);
         yield return new WaitForSeconds(1.5f);
         canvasGroup.DOFade(0,1f);
         yield return new WaitForSeconds(1f);

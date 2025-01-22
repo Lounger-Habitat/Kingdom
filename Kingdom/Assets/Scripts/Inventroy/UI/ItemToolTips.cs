@@ -32,7 +32,8 @@ public class ItemToolTips : MonoBehaviour
             button.SetActive(false);
         }
 
-        LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetChild(1) as RectTransform);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
     }
 
     private string GetItemType(ItemType itemType)

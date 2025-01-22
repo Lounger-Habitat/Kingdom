@@ -57,11 +57,13 @@ public class DialogueUI : MonoBehaviour
                 faceRight.gameObject.SetActive(false);
                 faceLeft.gameObject.SetActive(true);
                 //TODO:图标与名字添加
+                nameLeft.text = piece.name;
             }
             else
             {
                 faceRight.gameObject.SetActive(true);
                 faceLeft.gameObject.SetActive(false);
+                nameRight.text = piece.name;
             }
             yield return dialogueText.DOText(piece.dialogueText, 1.5f).WaitForCompletion();
 

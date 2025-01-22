@@ -47,7 +47,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
         {
             isSelect = false;
         }
-
+        itemAmount= 0;
         slotImage.enabled = false;
         amountText.text = string.Empty;
         button.interactable = false;

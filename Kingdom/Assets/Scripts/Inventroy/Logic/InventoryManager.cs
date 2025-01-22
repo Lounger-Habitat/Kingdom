@@ -203,4 +203,84 @@ public class InventoryManager : Singleton<InventoryManager>
 
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// 下方方法不再只针对玩家，会有NPC 与 NPC之间的交换，所以会传入背包，不在固定使用玩家背包
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void AddItemAtBag(InventoryBag_SO bag,int ID, int amount)
+    {
+        //是否已经有该物品
+        var index = GetItemIndexInBag(ID,bag);
+        int i = 0;
+        if (index == -1 && CheckBagCapacity(bag,out i)) //背包没有这个物体，并且有空位
+        {
+            var item = new InventoryItem { itemID = ID, itemAmount = amount };
+            bag.itemList[i] = item;
+        }
+        else if (i != -1) //背包有这个物体
+        {
+            Debug.Log("背包有这个物品，增加数量");
+            int currentAmount = bag.itemList[index].itemAmount + amount;
+            var item = new InventoryItem { itemID = ID, itemAmount = currentAmount };
+            bag.itemList[index] = item;
+        }
+        else //背包没有这个物体，并且背包已经满了
+        {
+            Debug.Log("背包已满，无法添加物品");
+        }
+
+        //更新背包UI
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag);
+    }
+    private bool CheckBagCapacity(InventoryBag_SO bag,out int index)
+    {
+        index = -1;
+        for (int i = 0; i < playerBag.itemList.Count; i++)
+        {
+            if (playerBag.itemList[i].itemID == 0)
+            {
+                index = i;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 移除指定数量的背包物品
+    /// </summary>
+    /// <param name="ID">物品ID</param>
+    /// <param name="removeAmount">数量</param>
+    /// <param name="bag">背包</param>
+    public void RemoveItem(int ID, int removeAmount,InventoryBag_SO bag)
+    {
+        var index = GetItemIndexInBag(ID,bag);
+
+        if (bag.itemList[index].itemAmount > removeAmount)
+        {
+            var amount = bag.itemList[index].itemAmount - removeAmount;
+            var item = new InventoryItem { itemID = ID, itemAmount = amount };
+            bag.itemList[index] = item;
+        }
+        else if (bag.itemList[index].itemAmount == removeAmount)
+        {
+            var item = new InventoryItem();
+            bag.itemList[index] = item;
+        }
+
+        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, bag);
+    }
+
+    private int GetItemIndexInBag(int ID,InventoryBag_SO bag)
+    {
+        for (int i = 0; i < bag.itemList.Count; i++)
+        {
+            if (bag.itemList[i].itemID == ID)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
