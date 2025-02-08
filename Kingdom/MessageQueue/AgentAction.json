@@ -3,7 +3,7 @@
         {
             "ActionName": "Move",
             "Params": [
-                "Env-Cube 1"
+                "Env-Cube 0"
             ]
         },
         {
@@ -15,7 +15,19 @@
         {
             "ActionName": "Move",
             "Params": [
-                "Env-Cube 0"
+                "Env-Cube 1"
+            ]
+        },
+        {
+            "ActionName": "Move",
+            "Params": [
+                "Env-Cube 2"
+            ]
+        },
+        {
+            "ActionName": "Move",
+            "Params": [
+                "Env-Cube 3"
             ]
         }
     ]

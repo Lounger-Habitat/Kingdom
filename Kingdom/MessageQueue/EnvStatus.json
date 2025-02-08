@@ -1,1 +1,34 @@
-[{"name":"Env-Cube 0","position":{"x":4.0,"y":0.0,"z":4.0}},{"name":"Env-Cube 1","position":{"x":-4.0,"y":0.0,"z":4.0}},{"name":"Env-Cube 2","position":{"x":4.0,"y":0.0,"z":-4.0}},{"name":"Env-Cube 3","position":{"x":-4.0,"y":0.0,"z":-4.0}}]
+[
+    {
+        "name": "Env-Cube 0",
+        "position": {
+            "x": 4.0,
+            "y": 0.0,
+            "z": 4.0
+        }
+    },
+    {
+        "name": "Env-Cube 1",
+        "position": {
+            "x": -4.0,
+            "y": 0.0,
+            "z": 4.0
+        }
+    },
+    {
+        "name": "Env-Cube 2",
+        "position": {
+            "x": 4.0,
+            "y": 0.0,
+            "z": -4.0
+        }
+    },
+    {
+        "name": "Env-Cube 3",
+        "position": {
+            "x": -4.0,
+            "y": 0.0,
+            "z": -4.0
+        }
+    }
+]

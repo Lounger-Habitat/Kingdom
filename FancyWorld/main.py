@@ -63,7 +63,7 @@ class FancyWorld:
             response = client.chat(
                 model="aws/us.anthropic.claude-3-5-sonnet-20241022-v2:0",
                 messages=messages,
-                temperature=0,
+                temperature=0.8,
             )
             res = response.choices[0].message.content
             print(res)

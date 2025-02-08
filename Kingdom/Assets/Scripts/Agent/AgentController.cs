@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class AgentController : MonoBehaviour
 {
+    public bool isGround = true;
     public string testJson = @"{
     ""Actions"": [
         {
@@ -42,6 +43,9 @@ public class AgentController : MonoBehaviour
     ]";
     void Update()
     {
+
+        CheckGround();
+
         // WASD控制移动
         if (Input.GetKey(KeyCode.W))
         {
@@ -69,6 +73,21 @@ public class AgentController : MonoBehaviour
         }
 
     }
+
+    private void CheckGround()
+    {
+        // 检测是否在地面上
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.5f))
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
+        }
+    }
+
     public void Move(Vector3 direction)
     {
         // 移动
@@ -88,10 +107,12 @@ public class AgentController : MonoBehaviour
         }
         yield return new WaitUntil(() => transform.position == go.transform.position);
     }
-    public void Jump(float force = 5)
+    public IEnumerator Jump(float force = 5)
     {
         // 给一个向上的力
         GetComponent<Rigidbody>().AddForce(Vector3.up * force, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => isGround);
     }
 
     public void LoadAgentAction()
@@ -128,8 +149,7 @@ public class AgentController : MonoBehaviour
                 yield return MoveTarget(action.Params[0]);
                 break;
             case "Jump":
-                Jump(action.Params.Count > 0 ? float.Parse(action.Params[0]) : 5);
-                yield return null;
+                yield return Jump(action.Params.Count > 0 ? float.Parse(action.Params[0]) : 5);
                 break;
             default:
                 break;
