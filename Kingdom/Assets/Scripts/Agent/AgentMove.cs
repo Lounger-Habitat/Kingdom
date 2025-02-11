@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +18,8 @@ public class AgentMove : MonoBehaviour
     //public bool isStop;
     private Vector3 targetPos;
 
+    //到达目的地后回调
+    private Action action;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,20 +45,19 @@ public class AgentMove : MonoBehaviour
             }
         }
 
-        if (!playerCamera)
-        {
-            return;
-        }
-
         if (!playerAgent.hasPath)
         {
             playerAnimator.SetFloat(_animIDSpeed, 0f);
+            action?.Invoke();
         }
         else
         {
             playerAnimator.SetFloat(_animIDSpeed, 1.9f);
         }
-
+        if (!playerCamera)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
@@ -85,7 +85,7 @@ public class AgentMove : MonoBehaviour
         {
             if (FootstepAudioClips.Length > 0)
             {
-                var index = Random.Range(0, FootstepAudioClips.Length);
+                var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                 AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.position, FootstepAudioVolume);
             }
         }
@@ -96,6 +96,25 @@ public class AgentMove : MonoBehaviour
         if (animationEvent.animatorClipInfo.weight > 0.5f)
         {
             AudioSource.PlayClipAtPoint(LandingAudioClip, transform.position, FootstepAudioVolume);
+        }
+    }
+
+    //根据目标位置，将人物移动过去
+    public void MoveToTaregt(string envName)
+    {
+        var target = EnvironmentManager.Instance.TargetTransform(envName);
+        if (target)//位置存在
+        {
+            //gogogo
+            playerAgent.SetDestination(target.position);
+            playerAnimator.SetFloat(_animIDSpeed, 1.9f);
+            action = ()=>{
+                Debug.Log("本次到达位置");
+                action = null;
+            };
+        }else
+        {
+            //位置不存在
         }
     }
 }

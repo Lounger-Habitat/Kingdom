@@ -35,8 +35,12 @@ public class AgentDialogue : MonoBehaviour
     //每句话说完，通知对方，我话讲完了，你可以继续说了，如果对方讲完，我没有内容，通知对方我结束了
 
     public void StartTalk(AgentDialogue otherAgent){
+        //检测当前能否对话，对方是否正在对话
+        if (isTalking || otherAgent.isTalking)
+        {
+            return;
+        }
         //通知对方聆听
-        //otherAgent.isListening = true;
         //开始说话
         isTalking = true;
         otherAgent.isTalking = true;
@@ -65,7 +69,7 @@ public class AgentDialogue : MonoBehaviour
     public void ReciveTalk(AgentDialogue otherAgent,string message)
     {
         //接受对话信息
-        Debug.Log($"{otherAgent.name}对方说:{message}");
+        Debug.Log($"【{otherAgent.name}】对【{name}】说:{message}");
         //检查自己是否还有话，有就跟对面说
         if (dialogueStack.Count > 0)
         {
