@@ -192,4 +192,16 @@ public static class EventHandler
     {
         DisShowSelectAllTipsEvent?.Invoke();
     }
+
+    public static event Action<TipsData> ShowTalkEvent;
+    public static void CallShowTalkEvent(TipsData data)
+    {
+        ShowTalkEvent?.Invoke(data);
+    }
+
+    public static event Action<string> DisShowTalkEvent;
+    public static void CallDisShowTalkEvent(string gameobjectID)
+    {
+        DisShowTalkEvent?.Invoke(gameobjectID);
+    }
 }
