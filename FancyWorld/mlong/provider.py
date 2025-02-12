@@ -15,13 +15,12 @@ class ProviderFactory:
 
     @staticmethod
     def provider(provider, config):
-        print(provider)
-        print(config)
+        # 获取 provider 的类名
         provider_class_name = f"{provider.capitalize()}Provider"
+        # 获取 provider 的模块名
         provider_module_name = f"{provider}_provider"
 
         module_path = f"mlong.providers.{provider_module_name}"
-        print(module_path)
 
         try:
             module = importlib.import_module(module_path)

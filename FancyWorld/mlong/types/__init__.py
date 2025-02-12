@@ -1,1 +1,1 @@
-from .type_chat import ChatResponse
+from .type_chat import ChatResponse, ChatStreamResponse

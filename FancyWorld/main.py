@@ -1,6 +1,6 @@
 import time
 from utils import *
-from mlong.client import Client
+from mlong.model import Model
 import mlong.utils as utils
 
 
@@ -11,7 +11,7 @@ class FancyWorld:
 
     def link_start(self):
         print("Welcome to", self.name)
-        client = Client()
+        client = Model()
 
         while True:
 
@@ -61,7 +61,7 @@ class FancyWorld:
             ]
 
             response = client.chat(
-                model="aws/us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+                model="us.anthropic.claude-3-5-sonnet-20241022-v2:0",
                 messages=messages,
                 temperature=0.8,
             )

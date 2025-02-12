@@ -2,7 +2,8 @@ import os
 
 import boto3
 from mlong.provider import Provider
-from mlong.types import ChatResponse
+from mlong.types import ChatResponse, ChatStreamResponse
+from mlong.utils import format_messages_for_aws
 
 
 class AwsProvider(Provider):
@@ -34,7 +35,7 @@ class AwsProvider(Provider):
 
         """
         self.region_name = config.get(
-            "region_name", os.getenv("AWS_REGION", "us-east-1")
+            "region_name", os.getenv("AWS_REGION", "us-west-2")
         )
         self.client = boto3.client("bedrock-runtime", region_name=self.region_name)
         self.inference_parameters = [
@@ -52,22 +53,47 @@ class AwsProvider(Provider):
         ][0]["text"]
         return norm_response
 
+    def normalize_stream_response(self, response):
+        """Normalize the response from the Bedrock API to match OpenAI's response format."""
+        norm_response = ChatStreamResponse()
+        # norm_response.id = response["id"]
+        stream = response.get("stream")
+        norm_response.stream = stream
+        # if stream:
+        #     print(type(stream))
+        #     for event in stream:
+
+        #         if "messageStart" in event:
+        #             print(f"\nRole: {event['messageStart']['role']}")
+
+        #         if "contentBlockDelta" in event:
+        #             print(event["contentBlockDelta"]["delta"]["text"], end="")
+
+        #         if "messageStop" in event:
+        #             print(f"\nStop reason: {event['messageStop']['stopReason']}")
+
+        #         if "metadata" in event:
+        #             metadata = event["metadata"]
+        #             if "usage" in metadata:
+        #                 print("\nToken usage")
+        #                 print(f"Input tokens: {metadata['usage']['inputTokens']}")
+        #                 print(f":Output tokens: {metadata['usage']['outputTokens']}")
+        #                 print(f":Total tokens: {metadata['usage']['totalTokens']}")
+        #             if "metrics" in event["metadata"]:
+        #                 print(
+        #                     f"Latency: {metadata['metrics']['latencyMs']} milliseconds"
+        #                 )
+        # norm_response = ChatResponse()
+        # norm_response.choices[0].message.content = response["output"]["message"][
+        #     "content"
+        # ][0]["text"]
+        return norm_response
+
     def chat(self, model, messages, **kwargs):
         # Any exception raised by Anthropic will be returned to the caller.
         # Maybe we should catch them and raise a custom LLMError.
         # https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html
-        system_message = []
-        if messages[0]["role"] == "system":
-            # system_message = [{"text": messages[0]["content"]}]
-            messages = messages[1:]
-
-        formatted_messages = []
-        for message in messages:
-            # QUIETLY Ignore any "system" messages except the first system message.
-            if message["role"] != "system":
-                formatted_messages.append(
-                    {"role": message["role"], "content": [{"text": message["content"]}]}
-                )
+        system_message, prompot_mesages = format_messages_for_aws(messages)
 
         # Maintain a list of Inference Parameters which Bedrock supports.
         # These fields need to be passed using inferenceConfig.
@@ -77,17 +103,31 @@ class AwsProvider(Provider):
 
         # Iterate over the kwargs and separate the inference parameters and additional model request fields.
         for key, value in kwargs.items():
+            # 排除 stream 参数
+            if key == "stream":
+                continue
+
             if key in self.inference_parameters:
                 inference_config[key] = value
             else:
                 additional_model_request_fields[key] = value
-
-        # Call the Bedrock Converse API.
-        response = self.client.converse(
-            modelId=model,  # baseModelId or provisionedModelArn
-            messages=formatted_messages,
-            system=system_message,
-            inferenceConfig=inference_config,
-            additionalModelRequestFields=additional_model_request_fields,
-        )
-        return self.normalize_response(response)
+        if kwargs.get("stream") is True:
+            # Call the Bedrock Converse API with the stream parameter.
+            response = self.client.converse_stream(
+                modelId=model,  # baseModelId or provisionedModelArn
+                messages=prompot_mesages,
+                system=system_message,
+                inferenceConfig=inference_config,
+                additionalModelRequestFields=additional_model_request_fields,
+            )
+            return self.normalize_stream_response(response)
+        else:
+            # Call the Bedrock Converse API.
+            response = self.client.converse(
+                modelId=model,  # baseModelId or provisionedModelArn
+                messages=prompot_mesages,
+                system=system_message,
+                inferenceConfig=inference_config,
+                additionalModelRequestFields=additional_model_request_fields,
+            )
+            return self.normalize_response(response)
