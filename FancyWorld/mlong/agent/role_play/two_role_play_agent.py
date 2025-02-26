@@ -2,7 +2,6 @@ import json
 from string import Template
 
 from mlong.agent.role_play.role_play_agent import RolePlayAgent
-from mlong.model import Model
 from mlong.types.type_chat import ChatManager
 
 
