@@ -204,4 +204,34 @@ public static class EventHandler
     {
         DisShowTalkEvent?.Invoke(gameobjectID);
     }
+
+    public static event Action<string,string> AddActionEvent;
+    public static void CallAddActionEvent(string actionID,string actionName)
+    {
+        AddActionEvent?.Invoke(actionID,actionName);
+    }
+
+    public static event Action<string> RunActionEvent;
+    public static void CallRunActionEvent(string actionID)
+    {
+        RunActionEvent?.Invoke(actionID);
+    }
+
+    public static event Action<string> CompleteActionEvent;
+    public static void CallCompleteActionEvent(string actionID)
+    {
+        CompleteActionEvent?.Invoke(actionID);
+    }
+
+    public static event Action<string,string> AddStatusEvent;
+    public static void CallAddStatusEvent(string actionID,string actionName)
+    {
+        AddStatusEvent?.Invoke(actionID,actionName);
+    }
+
+    public static event Action<string,string> UpdateStatusEvent;
+    public static void CallUpdateStatusEvent(string actionID,string actionName)
+    {
+        UpdateStatusEvent?.Invoke(actionID,actionName);
+    }
 }

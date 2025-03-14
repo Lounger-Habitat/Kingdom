@@ -235,9 +235,9 @@ public class InventoryManager : Singleton<InventoryManager>
     private bool CheckBagCapacity(InventoryBag_SO bag,out int index)
     {
         index = -1;
-        for (int i = 0; i < playerBag.itemList.Count; i++)
+        for (int i = 0; i < bag.itemList.Count; i++)
         {
-            if (playerBag.itemList[i].itemID == 0)
+            if (bag.itemList[i].itemID == 0)
             {
                 index = i;
                 return true;
@@ -269,7 +269,7 @@ public class InventoryManager : Singleton<InventoryManager>
             bag.itemList[index] = item;
         }
 
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, bag);
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, bag);
     }
 
     private int GetItemIndexInBag(int ID,InventoryBag_SO bag)

@@ -13,16 +13,21 @@ public class EnvironmentManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    void Start()
-    {
         var envList = GetComponentsInChildren<EnvironmentTag>();
         foreach (var item in envList)
         {
             envDic.Add(item.enviromentName,item);
         }
     }
+
+    // void Start()
+    // {
+    //     var envList = GetComponentsInChildren<EnvironmentTag>();
+    //     foreach (var item in envList)
+    //     {
+    //         envDic.Add(item.enviromentName,item);
+    //     }
+    // }
 
 
     public Transform TargetTransform(string envName)

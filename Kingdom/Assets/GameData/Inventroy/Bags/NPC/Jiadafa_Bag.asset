@@ -19,4 +19,10 @@ MonoBehaviour:
     itemAmount: 10
   - itemID: 0
     itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
   money: 999999

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -84,7 +85,8 @@ public class GridMapManager : Singleton<GridMapManager>
         {
             TileDetails tileDetails = new TileDetails
             {
-                worldPos = tileProperty.worldPos
+                worldPos = tileProperty.worldPos,
+                canUse = tileProperty.canUse
             };
 
             //字典的Key
@@ -123,7 +125,8 @@ public class GridMapManager : Singleton<GridMapManager>
             {
                 var title = tileParent.Find(tileProperty.tileName);
                 title.GetComponent<Collider>().enabled = tileProperty.canUse;
-                title.Find("CanUse").gameObject.SetActive(tileProperty.canUse);
+                tileProperty.canUseObj=title.Find("CanUse").gameObject;
+                tileProperty.canUseObj.SetActive(tileProperty.canUse);
             }
             else
             {
@@ -185,6 +188,43 @@ public class GridMapManager : Singleton<GridMapManager>
                 if (tileDetails.seedItemID > -1)
                     EventHandler.CallPlantSeedEvent(tileDetails.seedItemID, tileDetails);
             }
+        }
+    }
+
+    public void CheckPlantPos(Vector3 curentPos,string tileID,out Vector3 targetPos)
+    {
+        targetPos = Vector3.zero;
+        var titleDetail = GetTileDetails(tileID);
+        if (titleDetail != null)
+        {
+            if (Vector3.Distance(titleDetail.worldPos,curentPos)>0.5f)
+            {
+                //角色还未到指定位置，先去指定位置
+                targetPos = titleDetail.worldPos;
+            }
+        }
+    }
+
+    //执行种植农作物
+    /// <summary>
+    /// 在对应地块种植作物
+    /// </summary>
+    /// <param name="seedID">农作物种子ID</param>
+    /// <param name="tileID">地块唯一ID</param>
+    public IEnumerator PlantSeed(int seedID, string tileID)
+    {
+        var titleDetail = GetTileDetails(tileID);
+        var itemDetails = InventoryManager.Instance.GetItemDetails(seedID);
+        if (titleDetail!=null && itemDetails!=null)//有这块地
+        {
+            OnExecuteActionAfterAnimation(titleDetail.worldPos, itemDetails);
+            yield return new WaitForSeconds(1.5f);//种植完成后等待1.5秒
+            Debug.Log("种植完成");
+        }
+        else
+        {
+            Debug.Log("没有这块地,或者没有这个种子");
+            yield return null;
         }
     }
 
@@ -318,12 +358,33 @@ public class GridMapManager : Singleton<GridMapManager>
         {
             if (!item.canUse)
             {
+                string key = item.worldPos.x.ToString("00") + "x" + item.worldPos.y.ToString("00") + "y" + item.worldPos.z.ToString("00") + "z" + SceneManager.GetActiveScene().name;
+                var titleDetail = GetTileDetails(key);
+                titleDetail.canUse = true;//设定可以种植
                 item.canUse = true;//设定可以种植
                 item.canUseObj.SetActive(true);
                 item.canUseObj.transform.parent.GetComponent<Collider>().enabled = true;//打开碰撞器
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// 获取可以种植的所有地块
+    /// </summary>
+    /// <returns>返回地块ID列表</returns>
+    public List<string> GetCanPlantTitle(){
+        var res =new List<string>();
+        foreach (var item in tileDetailsDict)
+        {
+            if (item.Value.seedItemID == -1 && item.Value.canUse)
+            {
+                Debug.Log("可以种植的地块" + item.Key);
+                res.Add(item.Key);
+            }
+        }
+
+        return res;
     }
 
     public void CloseCropTile()

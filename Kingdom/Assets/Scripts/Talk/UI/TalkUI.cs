@@ -29,6 +29,10 @@ public class TalkUI : MonoBehaviour
             var tipsItem = Instantiate(prefabs,parent);
             tipsItem.Init(data);
             headTipsItems.Add(tipsItem);
+        }else
+        {
+           var tipsItem= headTipsItems.Find(item=>item.selfData.belongID == data.belongID);
+           tipsItem.Init(data);
         }
     }
 

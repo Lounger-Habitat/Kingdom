@@ -22,24 +22,22 @@ class TwoRolePlayAgent:
         self.passive_end = False
 
         self.chat_man = ChatManager()
-        self.chat_man.system_message(self.active_topic)
+        self.chat_man.system = self.active_topic
 
     def process_topic(self):
         self.active_topic = self.topic.substitute(
-            name=self.active.name,
-            peer_name=self.passive.name,
+            name=self.active.role.name,
+            peer_name=self.passive.role.name,
             peer_info=self.passive.role_system,
         )
         self.passive_topic = self.topic.substitute(
-            name=self.passive.name,
-            peer_name=self.active.name,
+            name=self.passive.role.name,
+            peer_name=self.active.role.name,
             peer_info=self.active.role_system,
         )
         passive_system = self.passive.chat_man.system
 
-        self.passive.chat_man.system_message(
-            passive_system + f"\n\n{self.passive_topic}"
-        )
+        self.passive.chat_man.system = passive_system + f"\n\n{self.passive_topic}"
 
     def chat(self, topic=None):
         if topic is None:
@@ -55,7 +53,7 @@ class TwoRolePlayAgent:
                 print()
             else:
                 active_res = self.active.chat(passive_res)
-                print(f"{self.active.name}: \n{self.active.chat_man.messages}")
+                print(f"{self.active.role.name}: \n{self.active.chat_man.messages}")
                 # print(f"{self.active.name}: \n{active_res}")
                 print()
 
@@ -65,7 +63,7 @@ class TwoRolePlayAgent:
                 break
 
             passive_res = self.passive.chat(active_res)
-            print(f"{self.passive.name}:  \n{self.passive.chat_man.messages}")
+            print(f"{self.passive.role.name}:  \n{self.passive.chat_man.messages}")
             # print(f"{self.passive.name}:  \n{passive_res}")
             print()
             self.chat_man.add_assistant_response(passive_res)
@@ -73,7 +71,7 @@ class TwoRolePlayAgent:
             if self.is_over(p_res=passive_res):
                 break
         messages = self.chat_man.messages
-        messages = self.replace_role_name(messages, self.active.name, self.passive.name)
+        messages = self.replace_role_name(messages, self.active.role.name, self.passive.role.name)
 
         return messages
 

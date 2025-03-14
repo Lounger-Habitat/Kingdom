@@ -1,0 +1,107 @@
+[{
+  "model_id": "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "messages": [
+    {
+     "role":"system","content":"你是个人冒险家，在三个月前离开城镇去南方冒险，今天刚刚回到城镇。听说城镇刚经历了大战"
+    },
+    {
+      "role":"user","content":"你回到城镇，想了解最近都发生了什么，根据地图有【铁匠铺、肉摊、书店、海鲜店、服装店、武器店、珠宝店、一号农田、马场】，可交流人物有【铁匠铺老板(tjplb)、肉摊老板(jdf)、武器店老板(wqdlb)、珠宝店老板(zbdlb)】你打算随便逛一逛，计划出你要去的地方。可执行指令有：1.Move(target):移动到target位置，target为地图中地点名字,2.Chat(people):与people交流，people为名字。只遵循json格式回复，例如：[{\"ActionName\":\"Move\",\"Params\":\"铁匠铺\"},...]"
+    }
+  ],
+  "temperature": 0.6,
+  "maxTokens": 8192,
+  "stream": false
+},
+{
+  "model_id": "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "messages": [
+    {
+     "role":"system","content":"你是一个精灵，离开部落来到此地为了寻找一个有缘人，此人可以助你获得族长之位"
+    },
+    {
+      "role":"user","content":""
+    }
+  ],
+  "temperature": 0.6,
+  "maxTokens": 8192,
+  "stream": false
+},
+{
+  "role_name": "jdf",
+  "model_id": "string",
+  "messages": [
+    {}
+  ],
+  "temperature": 0,
+  "maxTokens": 100,
+  "stream": false
+},
+{
+  "active_role_name": "nameOne",
+  "passive_role_name": "nameTwo",
+  "topic": "",
+  "model_id": "string",
+  "messages": [
+    {}
+  ],
+  "temperature": 0,
+  "maxTokens": 100,
+  "stream": false
+},
+{
+  "res": [
+    {
+      "ActionName": "Move",
+      "Params": "铁匠铺"
+    },
+    {
+      "ActionName": "Chat",
+      "Params": "tjplb"
+    },
+    {
+      "ActionName": "Move",
+      "Params": "武器店"
+    },
+    {
+      "ActionName": "Chat",
+      "Params": "wqdlb"
+    },
+    {
+      "ActionName": "Move",
+      "Params": "肉摊"
+    },
+    {
+      "ActionName": "Chat",
+      "Params": "jdf"
+    },
+    {
+      "ActionName": "Move",
+      "Params": "中心广场"
+    },
+    {
+      "ActionName": "Trade",
+      "Params": {
+        "otherName": "jdf",
+        "mytradeItems": [
+          "1002*3",
+          "1002*2"
+        ],
+        "mytradeMoney": 0,
+        "othertradeItems": [],
+        "othertradeMoney": 120
+      }
+    },
+    {
+      "ActionName": "Give",
+      "Params": {
+        "otherName": "jdf",
+        "Items": [
+          "1002*3",
+          "1002*2"
+        ],
+        "Money": 0
+      }
+    }
+  ]
+}
+]

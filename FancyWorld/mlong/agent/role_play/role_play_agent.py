@@ -1,3 +1,4 @@
+from dataclasses import asdict, dataclass
 import json
 from string import Template
 
@@ -5,6 +6,11 @@ from mlong.utils.util import parse_model_stream_response, parse_text_stream_resp
 from mlong.model import Model
 from mlong.types.type_chat import ChatManager
 from mlong.utils import stream_to_str
+
+@dataclass
+class Role:
+    name:str
+    daily_logs:str
 
 
 class RolePlayAgent:
@@ -34,8 +40,8 @@ class RolePlayAgent:
 
     def load_role_info(self):
         self.role_system_template = Template(self.role_info["role_system"])
-        self.role = self.role_info["role"]
-        self.role_system = self.role_system_template.substitute(self.role)
+        self.role = Role(**self.role_info["role"])
+        self.role_system = self.role_system_template.substitute(asdict(self.role))
 
     def chat(self, input_messages):
         # 处理消息

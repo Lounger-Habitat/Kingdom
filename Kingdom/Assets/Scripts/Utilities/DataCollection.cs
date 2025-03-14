@@ -112,6 +112,7 @@ public class TileDetails
 
     public int growthDays = -1;
     public int daysSinceLastHarvest = -1;
+    public bool canUse;
 
     public Vector3 worldPos;
 }

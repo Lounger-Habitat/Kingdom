@@ -38,6 +38,7 @@ class TwoRolePlayParam(BaseModel):
     active_role_name: str
     passive_role_name: str
     topic: str = None
+    thinking: bool = False
     model_id: str
     messages: List[dict]
     temperature: float = 0
@@ -178,9 +179,15 @@ async def multi(roleplay_param: RolePlayParam):
     dir_path = "configs"
     role_info = {}
     # 扫描config目录获取所有配置文件
+    print( os.listdir(dir_path))
     for file_name in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_name)
-        with open(file_path, "r") as f:
+        print(file_path)
+        with open(file_path, "r",encoding="utf-8") as f:
+            # name = file_name.split(".")[0]
+            # print(name)
+            # temp = yaml.safe_load(f)
+            # print("-------",temp)
             role_info[file_name.split(".")[0]] = yaml.safe_load(f)
     rpa = RolePlayAgent(role_info=role_info[roleplay_param.role_name])
     res = rpa.step_stream("一片白茫茫")
@@ -251,12 +258,12 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
     # 扫描config目录获取所有配置文件
     for file_name in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_name)
-        with open(file_path, "r") as f:
+        with open(file_path, "r",encoding="utf-8") as f:
             role_info[file_name.split(".")[0]] = yaml.safe_load(f)
     rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
     rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
 
-    if two_roleplay_param.topic is None:
+    if two_roleplay_param.topic is None or  two_roleplay_param.topic is "":
         topic = """
     # 事件：社交对话
         - 时间：现在正在发生
@@ -265,10 +272,15 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
         - 对方信息：$peer_info
 
     [注意] 
-        非常随意的日常对话，闲聊,简洁，完整，动作和对话使用不同标记，不要发散太多。限制在本场景内，场景改变对话要结束。
+        非常随意的日常对话，每人轮流说一句话，简洁，完整，只需要对话，不要发散太多。限制在本场景内。
+        只要对话内容，每句话不超过25个汉字。
 
     [结束条件]  
-        结束对话时，必须双方都输出[END]符号。 如果一方结束，无更多话可说，一方尚未结束，那么结束方则使用[无更多信息][END]符号替代。"""
+        结束话题使用[END]符号结尾。
+    
+    交流大概5-8句话，然后自然的结束话题。
+    接下来直接开始对话。
+"""
     else:
         topic = two_roleplay_param.topic
     rpa_dialogue = TwoRolePlayAgent(topic=topic, active_role=rpa_a, passive_role=rpa_p)
@@ -318,6 +330,68 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
     #             await asyncio.sleep(0.1)  # 确保异步行为
     #         if i > 5:
     #             pending = False
+
+    return StreamingResponse(
+        stream(res),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+# thinking mode
+@app.post("/agent/tworoleplay")
+async def multi(two_roleplay_param: TwoRolePlayParam):
+    """
+    SSE 端点，向客户端推送数据。
+    """
+    cache_message = []
+    dir_path = "configs"
+    role_info = {}
+    # 扫描config目录获取所有配置文件
+    for file_name in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, file_name)
+        with open(file_path, "r",encoding="utf-8") as f:
+            role_info[file_name.split(".")[0]] = yaml.safe_load(f)
+    rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
+    rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
+
+    if two_roleplay_param.topic is None or  two_roleplay_param.topic is "":
+        topic = """
+    # 事件：社交对话
+        - 时间：现在正在发生
+        - 地点：街道上相遇
+        - 社交关系：朋友(${name},${peer_name})
+        - 对方信息：$peer_info
+
+    [注意] 
+        非常随意的日常对话，闲聊,简洁，完整，只需要对话，不要发散太多。限制在本场景内，场景改变对话要结束。
+
+    [结束条件]  
+        结束对话时，必须双方都输出[END]符号。 如果一方结束，无更多话可说，一方尚未结束，那么结束方则使用[无更多信息][END]符号替代。"""
+    else:
+        topic = two_roleplay_param.topic
+    rpa_dialogue = TwoRolePlayAgent(topic=topic, active_role=rpa_a, passive_role=rpa_p)
+    print(type(rpa_dialogue))
+    print(rpa_dialogue)
+
+    res = rpa_dialogue.chat_stream()
+
+    async def stream(response):
+        for item in response:
+            i = json.loads(item)
+            if "data" in i:
+                t = f"data: {item}\n\n"
+            if "reasoning_data" in i:
+                t = f"data: {item}\n\n"
+            if "event" in i:
+                t = f"event: {item}\n\n"
+            # 按 SSE 格式返回数据
+            yield t
+            await asyncio.sleep(0)  # 模拟延迟
 
     return StreamingResponse(
         stream(res),

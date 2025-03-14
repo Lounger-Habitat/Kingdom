@@ -38,11 +38,11 @@ MonoBehaviour:
   - ID: 2003
     taskName: "\u7B79\u96C6\u7CAE\u98DF(\u4E8C)"
     des: "\u5C06\u519B\u60F3\u8981\u53CD\u51FB\uFF0C\u5E0C\u671B\u7B79\u96C6\u5927\u91CF\u7684\u7CAE\u98DF"
-    isDone: 1
+    isDone: 0
     itemID: e9030000ed030000ee030000ef030000
     itemNumbers: fffffffff4010000
     front_task: d1070000d2070000
-    received: 1
+    received: 0
     rewardItemID: f3030000
     rewardNumber: 01000000
     rewardMoney: 210

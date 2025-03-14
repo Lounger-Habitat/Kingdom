@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TalkUIItem : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class TalkUIItem : MonoBehaviour
     {
         tipsText.text = tipsData.tipsText;
         selfData = tipsData;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tipsText.transform as RectTransform);
     }
 
     void Update()
@@ -23,7 +25,7 @@ public class TalkUIItem : MonoBehaviour
         }
         //Vector2 screenPos = CameraManager.Instance.currentCamera.WorldToScreenPoint(selfData.worldPos);
         //rectTransform.anchoredPosition = screenPos;
-        SetUIScreenPositionByWorldPosition(CameraManager.Instance.currentCamera, canvasRect, rectTransform, selfData.worldPos);
+        SetUIScreenPositionByWorldPosition(CameraManager.Instance.currentCamera, canvasRect, rectTransform, selfData.worldPos,selfData.worldTransform);
     }
 
     /// <summary>
@@ -36,8 +38,12 @@ public class TalkUIItem : MonoBehaviour
     /// <param name="worldPosition">世界空间位置。</param>
     /// <param name="failedUIPosition">当世界空间位置在世界相机背面时的UI位置。</param>
     /// <returns></returns>
-    public static bool SetUIScreenPositionByWorldPosition(Camera worldCamera, Canvas uiCanvas, RectTransform uiTransform, Vector3 worldPosition, Vector2? failedUIPosition = null)
+    public static bool SetUIScreenPositionByWorldPosition(Camera worldCamera, Canvas uiCanvas, RectTransform uiTransform, Vector3 worldPosition, Transform worldTransform,Vector2? failedUIPosition = null)
     {
+        if (worldTransform != null)
+        {
+            worldPosition = worldTransform.position + Vector3.up * 2.2f;
+        }
         // 当世界坐标在相机背面时，也能将坐标映射到Canvas上，这是不对的，所以要剔除相机背面的位置
         var camToWorldPos = worldPosition - worldCamera.transform.position;
         if (Vector3.Angle(camToWorldPos, worldCamera.transform.forward) > 90)

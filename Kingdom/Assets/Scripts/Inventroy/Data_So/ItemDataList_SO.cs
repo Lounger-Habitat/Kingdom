@@ -6,4 +6,9 @@ using UnityEngine;
 public class ItemDataList_SO : ScriptableObject
 {
     public List<ItemDetails> itemDetailsList;
+
+    public ItemDetails GetItemDetails(int itemID)
+    {
+        return itemDetailsList.Find(i => i.itemID == itemID);
+    }
 }

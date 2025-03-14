@@ -22,14 +22,14 @@ MonoBehaviour:
     gridType: 0
     boolTypeValue: 1
     worldPos: {x: 26, y: -25.035, z: 96.507}
-    canUse: 0
+    canUse: 1
     canUseObj: {fileID: 0}
     tileName: Tile
   - tileCoordinate: {x: 0, y: 0}
     gridType: 0
     boolTypeValue: 1
     worldPos: {x: 24.4, y: -25.035, z: 96.76}
-    canUse: 0
+    canUse: 1
     canUseObj: {fileID: 0}
     tileName: Tile (1)
   - tileCoordinate: {x: 0, y: 0}
