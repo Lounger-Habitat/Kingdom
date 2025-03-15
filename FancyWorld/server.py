@@ -7,13 +7,19 @@ from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, Request
 import yaml
 
-from mlong.model import Model
-from mlong.utils import user, system, assistant
-from mlong.agent.role_play.role_play_agent import RolePlayAgent
-from mlong.agent.role_play.two_role_play_agent import TwoRolePlayAgent
+from mlong.model_interface import Model
+from mlong.model_interface.utils import user, system, assistant
+from mlong.agent.role.role_agent import RoleAgent
+from mlong.agent.conversation.chat_ata import AgentToAgentChat
+from mlong.agent.conversation.chat_ftf import FLToFLChat
 from pydantic import BaseModel
 
 app = FastAPI()
+
+# const
+MAX_TOKENS_DEFAULT = 100
+TEMPERATURE_DEFAULT = 0.0
+MEMORY_SPACE = os.path.join(os.path.dirname(__file__), "configs", "memcache")
 
 
 # 定义请求数据模型
@@ -44,6 +50,13 @@ class TwoRolePlayParam(BaseModel):
     temperature: float = 0
     maxTokens: int = 100
     stream: bool = False
+
+
+class ConversationParam(BaseModel):
+    active_role_name: str
+    passive_role_name: str
+    topic: str = None
+    model_id: str
 
 
 async def parse_model_stream_response(response):
@@ -179,17 +192,17 @@ async def multi(roleplay_param: RolePlayParam):
     dir_path = "configs"
     role_info = {}
     # 扫描config目录获取所有配置文件
-    print( os.listdir(dir_path))
+    print(os.listdir(dir_path))
     for file_name in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_name)
         print(file_path)
-        with open(file_path, "r",encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             # name = file_name.split(".")[0]
             # print(name)
             # temp = yaml.safe_load(f)
             # print("-------",temp)
             role_info[file_name.split(".")[0]] = yaml.safe_load(f)
-    rpa = RolePlayAgent(role_info=role_info[roleplay_param.role_name])
+    rpa = RoleAgent(role_info=role_info[roleplay_param.role_name])
     res = rpa.step_stream("一片白茫茫")
     print(type(res))
     print(res)
@@ -248,22 +261,22 @@ async def multi(roleplay_param: RolePlayParam):
 
 
 @app.post("/agent/tworoleplay")
-async def multi(two_roleplay_param: TwoRolePlayParam):
+async def tworoleplay(two_roleplay_param: TwoRolePlayParam):
     """
     SSE 端点，向客户端推送数据。
     """
     cache_message = []
-    dir_path = "configs"
+    dir_path = "configs/roles"
     role_info = {}
     # 扫描config目录获取所有配置文件
     for file_name in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_name)
-        with open(file_path, "r",encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             role_info[file_name.split(".")[0]] = yaml.safe_load(f)
-    rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
-    rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
+    # rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
+    # rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
 
-    if two_roleplay_param.topic is None or  two_roleplay_param.topic is "":
+    if two_roleplay_param.topic is None or two_roleplay_param.topic is "":
         topic = """
     # 事件：社交对话
         - 时间：现在正在发生
@@ -283,7 +296,11 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
 """
     else:
         topic = two_roleplay_param.topic
-    rpa_dialogue = TwoRolePlayAgent(topic=topic, active_role=rpa_a, passive_role=rpa_p)
+    rpa_dialogue = AgentToAgentChat(
+        topic=topic,
+        active_role=role_info[two_roleplay_param.active_role_name],
+        passive_role=role_info[two_roleplay_param.passive_role_name],
+    )
     print(type(rpa_dialogue))
     print(rpa_dialogue)
 
@@ -342,24 +359,23 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
     )
 
 
-# thinking mode
-@app.post("/agent/tworoleplay")
-async def multi(two_roleplay_param: TwoRolePlayParam):
+@app.post("/conversation/ftf")
+async def ftf_chat(conversation_param: ConversationParam):
     """
     SSE 端点，向客户端推送数据。
     """
     cache_message = []
-    dir_path = "configs"
+    dir_path = "configs/roles"
     role_info = {}
     # 扫描config目录获取所有配置文件
     for file_name in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_name)
-        with open(file_path, "r",encoding="utf-8") as f:
+        with open(file_path, "r") as f:
             role_info[file_name.split(".")[0]] = yaml.safe_load(f)
-    rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
-    rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
+    # rpa_a = RolePlayAgent(role_info=role_info[two_roleplay_param.active_role_name])
+    # rpa_p = RolePlayAgent(role_info=role_info[two_roleplay_param.passive_role_name])
 
-    if two_roleplay_param.topic is None or  two_roleplay_param.topic is "":
+    if conversation_param.topic is None:
         topic = """
     # 事件：社交对话
         - 时间：现在正在发生
@@ -368,13 +384,19 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
         - 对方信息：$peer_info
 
     [注意] 
-        非常随意的日常对话，闲聊,简洁，完整，只需要对话，不要发散太多。限制在本场景内，场景改变对话要结束。
+        非常随意的日常对话，闲聊,简洁，完整，动作和对话使用不同标记，不要发散太多。限制在本场景内，场景改变对话要结束。
 
     [结束条件]  
         结束对话时，必须双方都输出[END]符号。 如果一方结束，无更多话可说，一方尚未结束，那么结束方则使用[无更多信息][END]符号替代。"""
     else:
-        topic = two_roleplay_param.topic
-    rpa_dialogue = TwoRolePlayAgent(topic=topic, active_role=rpa_a, passive_role=rpa_p)
+        topic = conversation_param.topic
+    rpa_dialogue = FLToFLChat(
+        topic=topic,
+        active_role=role_info[conversation_param.active_role_name],
+        passive_role=role_info[conversation_param.passive_role_name],
+        memory_space=MEMORY_SPACE,
+        model_id=conversation_param.model_id,
+    )
     print(type(rpa_dialogue))
     print(rpa_dialogue)
 
@@ -384,8 +406,6 @@ async def multi(two_roleplay_param: TwoRolePlayParam):
         for item in response:
             i = json.loads(item)
             if "data" in i:
-                t = f"data: {item}\n\n"
-            if "reasoning_data" in i:
                 t = f"data: {item}\n\n"
             if "event" in i:
                 t = f"event: {item}\n\n"
